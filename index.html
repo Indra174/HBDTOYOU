@@ -1,107 +1,827 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Warung Mama Ocit</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SockLocal - Bisnis Kaos Kaki Berkualitas</title>
+    <style>
+        /* Global Styling */
+        :root {
+            --primary: #5d3587;  /* Purple */
+            --secondary: #ffd166; /* Yellow */
+            --dark: #222831;     /* Dark gray */
+            --light: #fafafa;    /* Off-white */
+            --gray: #ececec;     /* Light gray */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #e0e3ff 0%, #a8b6ff 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 209, 102, 0.4);
+        }
+        
+        .secondary-btn {
+            background-color: var(--primary);
+            margin-left: 1rem;
+        }
+        
+        .secondary-btn:hover {
+            box-shadow: 0 5px 15px rgba(93, 53, 135, 0.4);
+        }
+        
+        .cta-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .color-options {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        
+        .color-option {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 0 2px rgba(0,0,0,0.2);
+        }
+        
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-info .price {
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+        
+        .product-info .description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: #f6f5ff;
+            padding: 4rem 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-card .quote {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-card .author {
+            font-weight: 700;
+        }
+        
+        .rating {
+            color: var(--secondary);
+            margin-top: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #222831;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .contact-info {
+            margin-top: 1rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            margin-top: 2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 2rem;
+            }
+            
+            nav ul li {
+                margin: 1rem 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+                font-size: 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">Warung Mama Ocit</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="#">Beranda</a></li>
-          <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
-          <li class="nav-item"><a class="nav-link" href="keranjang/keranjang.html">Keranjang</a></li>
-          <li class="nav-item"><a class="nav-link" href="kontak/kontak.html">Kontak</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <header class="bg-light text-center py-5">
-    <div class="container">
-      <h1 class="display-5 fw-bold">Segarnya Es, Hangatnya Soto, Pedasnya Rujak</h1>
-      <p class="lead">Pesan makanan favoritmu langsung dari rumah!</p>
-      <a href="#menu" class="btn btn-success btn-lg">Lihat Menu</a>
-    </div>
-  </header>
-
-  <!-- Menu Section -->
-  <section id="menu" class="py-5">
-    <div class="container">
-      <h2 class="text-center mb-4">Menu Kami</h2>
-      <div class="row g-4">
-
-        <!-- Card 1 -->
-        <div class="col-md-4">
-          <div class="card h-100">
-            <img src="assets/WhatsApp Image 2025-08-07 at 13.53.04.jpeg" class="card-img-top" alt="Es Segar">
-            <div class="card-body">
-              <h5 class="card-title">Es viral stucky milk</h5>
-              <p class="card-text">minuman viral yang berasal dari thailand dan saat ini viral juga di Indonesia</p>
-              <p class="fw-bold">Rp7.000</p>
-              <button class="btn btn-success w-100" onclick="tambahKeKeranjang('Es Buah Segar', 10000)">Tambah ke Keranjang</button>
-            </div>
-          </div>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">Sock<span>Local</span></a>
+            <div class="mobile-menu">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#produk">Produk</a></li>
+                    <li><a href="#tentang">Tentang Kami</a></li>
+                    <li><a href="#fitur">Fitur</a></li>
+                    <li><a href="#testimoni">Testimoni</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <!-- Card 2 -->
-        <div class="col-md-4">
-          <div class="card h-100">
-            <img src="assets/WhatsApp Image 2025-08-07 at 14.26.55.jpeg" class="card-img-top" alt="Soto Ayam">
-            <div class="card-body">
-              <h5 class="card-title">Soto Ayam</h5>
-              <p class="card-text">Soto ayam hangat dengan kuah kuning, nasi, dan sambal khas.</p>
-              <p class="fw-bold">Rp7.000</p>
-              <button class="btn btn-success w-100" onclick="tambahKeKeranjang('Soto Ayam', 15000)">Tambah ke Keranjang</button>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Kaos Kaki Berkualitas untuk Kebutuhan Anda</h1>
+            <p>Dengan bahan premium dan desain modern, SockLocal memberikan kenyamanan maksimal untuk aktivitas sehari-hari Anda.</p>
+            <div class="cta-container">
+                <a href="#produk" class="btn">Lihat Produk</a>
+                <a href="#video" class="btn secondary-btn">Lihat Demo</a>
             </div>
-          </div>
         </div>
+    </section>
 
-        <!-- Card 3 -->
-        <div class="col-md-4">
-          <div class="card h-100">
-            <img src="assets/WhatsApp Image 2025-08-07 at 14.27.30.jpeg" class="card-img-top" alt="Rujak Tahu">
-            <div class="card-body">
-              <h5 class="card-title">Rujak Tahu</h5>
-              <p class="card-text">Tahu goreng hangat disiram bumbu kacang khas, cocok untuk cemilan sore!</p>
-              <p class="fw-bold">Rp7.000</p>
-              <button class="btn btn-success w-100" onclick="tambahKeKeranjang('Rujak Tahu', 12000)">Tambah ke Keranjang</button>
+    <!-- Video Demo Section -->
+    <section class="video-demo" id="video">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lihat Produk Kami</h2>
+                <p>Tonton demo kualitas bahan dan proses pembuatan kaos kaki kami</p>
             </div>
-          </div>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/example" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
         </div>
+    </section>
 
-      </div>
+    <!-- Products Section -->
+    <section class="products" id="produk">
+        <div class="container">
+            <div class="section-title">
+                <h2>Koleksi Kaos Kaki</h2>
+                <p>Temukan kaos kaki berkualitas untuk seluruh keluarga</p>
+            </div>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/image.png" alt="Kaos kaki anak dengan desain warna-warni dan karakter lucu" />
+                    </div>
+                    <div class="product-info">
+                        <h3>Kaos Kaki Anak</h3>
+                        <div class="price">Rp 9.000</div>
+                        <p class="description">Kaos kaki khusus anak dengan bahan lembut dan desain lucu untuk kenyamanan sehari-hari.</p>
+                        <button class="btn" onclick="openOrderModal('Kaos Kaki Anak')">Pesan Sekarang</button>
+                        <button class="wishlist-btn" data-product="Kaos Kaki Anak">❤️ Simpan</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6bd0caad-8efa-4b39-b7fa-e8aa135a6226.png" alt="Kaos kaki wanita dengan desain elegan warna pastel" />
+                    </div>
+                    <div class="product-info">
+                        <h3>Kaos Kaki Wanita</h3>
+                        <div class="price">Rp 8.000</div>
+                        <p class="description">Desain elegan dengan bahan katun premium khusus untuk wanita modern.</p>
+                        <button class="btn" onclick="openOrderModal('Kaos Kaki Wanita')">Pesan Sekarang</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8ffbd416-75eb-4064-9d0b-78bf1b168a4f.png" alt="Kaos kaki custom dengan berbagai pilihan warna yang bisa dipilih" />
+                    </div>
+                    <div class="product-info">
+                        <h3>Kaos Kaki Custom</h3>
+                        <div class="price">Rp 10.000</div>
+                        <p class="description">Pilihan warna dan desain custom sesuai keinginan Anda.</p>
+                        <div class="color-options">
+                            <div class="color-option" style="background-color: #ff0000;"></div>
+                            <div class="color-option" style="background-color: #00ff00;"></div>
+                            <div class="color-option" style="background-color: #0000ff;"></div>
+                            <div class="color-option" style="background-color: #ffff00;"></div>
+                            <div class="color-option" style="background-color: #ff00ff;"></div>
+                        </div>
+                        <button class="btn" onclick="openOrderModal('Kaos Kaki Custom')">Pesan Sekarang</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f15cfef3-e943-4061-ae6c-7a04f7809fd1.png" alt="Kaos kaki dewasa dengan berbagai ukuran untuk pria dan wanita" />
+                    </div>
+                    <div class="product-info">
+                        <h3>Kaos Kaki Dewasa</h3>
+                        <div class="price">Rp 10.000</div>
+                        <p class="description">Kaos kaki nyaman dengan berbagai ukuran untuk pria dan wanita dewasa.</p>
+                        <button class="btn" onclick="openOrderModal('Kaos Kaki Dewasa')">Pesan Sekarang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="fitur">
+        <div class="container">
+            <div class="section-title">
+                <h2>Keunggulan Kami</h2>
+                <p>Mengapa memilih produk SockLocal?</p>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧦</div>
+                    <h3>Bahan Berkualitas</h3>
+                    <p>Menggunakan bahan katun premium dengan campuran serat khusus untuk kenyamanan maksimal.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">👟</div>
+                    <h3>Desain Ergonomis</h3>
+                    <p>Dirancang dengan struktur anatomi kaki untuk memberikan kenyamanan sepanjang hari.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Daya Tahan Tinggi</h3>
+                    <p>Teknologi jahitan khusus membuat kaos kaki lebih tahan lama meski sering dicuci.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimoni">
+        <div class="container">
+            <div class="section-title">
+                <h2>Testimoni Pelanggan</h2>
+                <p>Apa kata mereka tentang SockLocal</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="quote">"Sejak menggunakan SockLocal, kaki saya tidak mudah lelah lagi meski seharian bekerja. Bahannya sangat nyaman!"</p>
+                    <p class="author">- Budi Santoso</p>
+                    <div class="rating">★★★★★</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="quote">"Desainnya fashionable tapi tetap nyaman. Cocok untuk dipakai kuliah maupun hangout."</p>
+                    <p class="author">- Ani Fitriani</p>
+                    <div class="rating">★★★★☆</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="quote">"Sebagai runner, saya puas dengan kaos kaki sport SockLocal. Tidak mudah geser dan menyerap keringat dengan baik."</p>
+                    <p class="author">- Rizki Pratama</p>
+                    <div class="rating">★★★★★</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontak">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang Kami</h3>
+                    <p>SockLocal adalah bisnis kaos kaki berkualitas yang berkomitmen memberikan produk terbaik untuk kenyamanan kaki Anda.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#produk">Produk</a></li>
+                        <li><a href="#tentang">Tentang Kami</a></li>
+                        <li><a href="#fitur">Fitur</a></li>
+                        <li><a href="#testimoni">Testimoni</a></li>
+                        <li><a href="#kontak">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Hubungi Kami</h3>
+                    <div class="contact-info">
+                        <p><i>📞</i> +62 812 3456 7890</p>
+                        <p><i>✉️</i> info@stepsock.com</p>
+                        <p><i>🏠</i> Jl. Kaos Kaki No. 123, Jakarta</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 SockLocal. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Order Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Pesan Kaos Kaki</h2>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="productName">Produk:</label>
+                    <input type="text" id="productName" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Jumlah:</label>
+                    <input type="number" id="quantity" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Nama Lengkap:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Nomor WhatsApp:</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Alamat Pengiriman:</label>
+                    <textarea id="address" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn">Pesan Sekarang</button>
+            </form>
+        </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="bg-success text-white text-center py-4">
-    <div class="container">
-      <p class="mb-1">&copy; 2025 Warung Mama Ocit</p>
-      <p id="kontak">Kontak via WhatsApp: <a class="text-white fw-bold" href="https://wa.me/6281010057730">0881-0100-57730</a></p>
-    </div>
-  </footer>
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
 
-  <script>
-    function tambahKeKeranjang(nama, harga) {
-      let keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
-      keranjang.push({ nama, harga });
-      localStorage.setItem('keranjang', JSON.stringify(keranjang));
-      alert(nama + ' ditambahkan ke keranjang!');
-    }
-  </script>
+    <script>
+        // Modal functionality
+        const modal = document.getElementById('orderModal');
+        const closeModal = document.querySelector('.close-modal');
+        
+        function openOrderModal(productName) {
+            document.getElementById('productName').value = productName;
+            modal.style.display = 'block';
+        }
+        
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Order form submission
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const product = document.getElementById('productName').value;
+            const quantity = document.getElementById('quantity').value;
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            
+            // Here you would typically send this data to your backend
+            // For demo, we'll just show an alert
+            alert(`Terima kasih ${name}! Pesanan ${quantity} ${product} akan diproses. Kami akan menghubungi via WhatsApp: ${phone}`);
+            
+            modal.style.display = 'none';
+            this.reset();
+        });
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        // Saved items will be stored in browser's localStorage
+        
+        // Initialize wishlist from localStorage
+        function initWishlist() {
+            document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                const productName = btn.getAttribute('data-product');
+                const savedItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+                
+                if (savedItems.includes(productName)) {
+                    btn.classList.add('active');
+                    btn.textContent = '❤️ Tersimpan';
+                }
+                
+                btn.addEventListener('click', function() {
+                    const productName = this.getAttribute('data-product');
+                    let savedItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+                    
+                    if (this.classList.contains('active')) {
+                        // Remove from wishlist
+                        savedItems = savedItems.filter(item => item !== productName);
+                        this.textContent = '❤️ Simpan';
+                    } else {
+                        // Add to wishlist
+                        savedItems.push(productName);
+                        this.textContent = '❤️ Tersimpan';
+                    }
+                    
+                    this.classList.toggle('active');
+                    localStorage.setItem('wishlist', JSON.stringify(savedItems));
+                    
+                    // For demo - show what's in storage
+                    console.log('Saved items:', JSON.parse(localStorage.getItem('wishlist')));
+                });
+            });
+        }
+        
+        // Initialize wishlist on page load
+        window.addEventListener('DOMContentLoaded', initWishlist);
+        
+        // Color selection
+        document.querySelectorAll('.color-option').forEach(color => {
+            color.addEventListener('click', function() {
+                // Remove active class from siblings
+                this.parentNode.querySelectorAll('.color-option').forEach(c => {
+                    c.classList.remove('active');
+                });
+                // Add active to clicked color
+                this.classList.add('active');
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const nav = document.querySelector('nav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on nav links
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
+
