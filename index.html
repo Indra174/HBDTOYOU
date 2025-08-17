@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SockLocal - Bisnis Kaos Kaki Berkualitas</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #5d3587;
+      --secondary: #ffd166;
+      --dark: #222831;
+      --light: #fafafa;
+      --gray: #ececec;
+    }
+    body { background-color: var(--light); color: var(--dark); font-family: 'Segoe UI', Tahoma, sans-serif; }
+    .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+    .logo span { color: var(--secondary); }
+    .btn-custom { background-color: var(--secondary); color: #fff; border-radius: 30px; padding: 0.8rem 2rem; font-weight: 600; }
+    .btn-custom:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 209, 102, 0.4); }
+    .btn-secondary-custom { background-color: var(--primary); color: #fff; }
+    .btn-secondary-custom:hover { box-shadow: 0 5px 15px rgba(93, 53, 135, 0.4); }
+    .hero { background: linear-gradient(135deg, #e0e3ff 0%, #a8b6ff 100%); padding: 8rem 0 4rem; text-align: center; }
+    .hero h1 { color: var(--primary); font-size: 2.5rem; }
+    .product-card { background-color: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .product-card:hover { transform: translateY(-10px); }
+    .product-image img { width: 100%; height: 250px; object-fit: cover; }
+    .price { font-weight: 700; color: var(--secondary); font-size: 1.2rem; }
+    .features { background-color: #f6f5ff; padding: 4rem 0; }
+    .feature-card { text-align: center; padding: 2rem; background-color: #fff; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+    .footer { background-color: var(--dark); color: white; padding: 3rem 0 1rem; }
+    .footer a { color: #ccc; text-decoration: none; }
+    .footer a:hover { color: #fff; }
+    .modal-content { border-radius: 8px; }
+    .color-option { width: 20px; height: 20px; border-radius: 50%; cursor: pointer; border: 2px solid #fff; box-shadow: 0 0 2px rgba(0,0,0,0.2); display: inline-block; }
+  /* === THEME SOCKLOCAL === */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar-brand span {
+      color: #6a0dad;
+      font-weight: bold;
+    }
+    .navbar-brand span:last-child {
+      color: #f4c542;
+    }
+
+    .btn-primary {
+      background-color: #6a0dad;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #520a9e;
+    }
+
+    /* Modal Header */
+    .modal-header {
+      background: #6a0dad;
+      color: white;
+    }
+
+    /* Toast */
+    .toast-success {
+      border-left: 5px solid #6a0dad;
+      background: #e9f7ef;
+      color: #155724;
+    }
+    .toast-error {
+      border-left: 5px solid #6a0dad;
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    /* Animasi Modal Scale */
+    .modal.fade .modal-dialog {
+      transform: scale(0.8);
+      transition: transform 0.3s ease-out;
+    }
+    .modal.fade.show .modal-dialog {
+      transform: scale(1);
+    }
+
+    /* Toast Animasi Slide */
+    .toast {
+      opacity: 0;
+      transform: translateX(100%);
+      transition: all 0.4s ease;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Animasi fade in */
+  .animate-fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-in-out;
+  }
+  .animate-fade.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hover efek pada card */
+  .produk-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .produk-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  /* Button animasi */
+  .btn-anim {
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  .btn-anim:hover {
+    transform: scale(1.08);
+    background-color: #0d6efd;
+  }
+
+  /* Efek animasi pada kartu produk */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Efek animasi gambar produk */
+.card img {
+  transition: transform 0.3s ease;
+}
+.card:hover img {
+  transform: scale(1.05);
+}
+
+/* Animasi tombol */
+.btn-primary {
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #6a0dad, #ff0077);
+  border: none;
+}
+
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 15px;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.product-card img {
+  max-height: 200px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+.product-card:hover img {
+  transform: scale(1.05);
+}
+.btn-primary {
+  background: #6a0dad;
+  border: none;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background: linear-gradient(45deg, #6a0dad, #ff0077);
+  transform: scale(1.05);
+}
+
+
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+  <div class="container">
+    <a class="logo" href="#">Sock<span>Local</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link" href="#produk">Produk</a></li>
+        <li class="nav-item"><a class="nav-link" href="#testimoni">Testimoni</a></li>
+        <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+        <li class="nav-item"><a class="nav-link" href="profil.html">Profil</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="container">
+    <h1>Kaos Kaki Berkualitas untuk Kebutuhan Anda</h1>
+    <p>Dengan bahan premium dan desain modern, SockLocal memberikan kenyamanan maksimal untuk aktivitas sehari-hari Anda.</p>
+    <div class="d-flex justify-content-center gap-3">
+      <a href="#produk" class="btn btn-custom">Lihat Produk</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUK -->
+<section id="produk" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-5">✨ Lihat Produk Kami ✨</h2>
+    <div class="row g-4">
+
+      <!-- Produk 1 -->
+      <div class="col-6 col-md-3">
+        <div class="card h-100 shadow-sm border-0 product-card">
+          <div class="p-3 text-center bg-white">
+            <img src="assets/kaos-kaki-sekolah-tapak-hitam-panjang-murah-tebal-kaos-kaki-sma-kaos-k.jpg" class="img-fluid" alt="Kaos Kaki Sekolah">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">Kaos Kaki Sekolah</h5>
+            <p class="text-muted">Rp 9.000</p>
+            <button class="btn btn-custom w-100 pesanBtn" data-produk="Kaos Kaki Sekolah">Pesan Sekarang</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produk 2 -->
+      <div class="col-6 col-md-3">
+        <div class="card h-100 shadow-sm border-0 product-card">
+          <div class="p-3 text-center bg-white">
+            <img src="assets/image2.png" class="img-fluid" alt="Kaos Kaki Wanita">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">Kaos Kaki Wanita</h5>
+            <p class="text-muted">Rp 8.000</p>
+            <button class="btn btn-custom w-100 pesanBtn" data-produk="Kaos Kaki Wanita">
+              Pesan Sekarang
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produk 3 -->
+      <div class="col-6 col-md-3">
+        <div class="card h-100 shadow-sm border-0 product-card">
+          <div class="p-3 text-center bg-white">
+            <img src="assets/no-brand_classic-white-kaos-kaki-motif-murah_full01.webp" class="img-fluid" alt="Kaos Kaki Motif">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">Kaos Kaki Motif</h5>
+            <p class="text-muted">Rp 8.000</p>
+            <button class="btn btn-custom w-100 pesanBtn" data-produk="Kaos Kaki Motif">
+              Pesan Sekarang
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produk 4 -->
+      <div class="col-6 col-md-3">
+        <div class="card h-100 shadow-sm border-0 product-card">
+          <div class="p-3 text-center bg-white">
+            <img src="assets/ChatGPT_Image_13_Agu_2025__20.11.16-removebg-preview.png" class="img-fluid" alt="Kaos Kaki Custom">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">Kaos Kaki Custom</h5>
+            <p class="text-muted">Rp 48.000</p>
+            <button class="btn btn-custom w-100 pesanBtn" data-produk="Kaos Kaki Custom">
+              Pesan Sekarang
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- MODAL FORM -->
+<div class="modal fade" id="pesanModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Form Pemesanan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formPesan">
+          <div class="mb-3">
+            <label class="form-label">Produk</label>
+            <input type="text" id="produkInput" class="form-control" readonly>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Jumlah</label>
+            <input type="number" class="form-control" id="jumlah" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Nama Lengkap</label>
+            <input type="text" class="form-control" id="nama" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Nomor WhatsApp</label>
+            <input type="text" class="form-control" id="wa" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Alamat</label>
+            <textarea class="form-control" id="alamat" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Pesan via WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Toast Container -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+
+  <!-- Toast Success -->
+  <div id="successToast" class="toast align-items-center text-bg-success border-0 mb-2" role="alert">
+    <div class="d-flex">
+      <div class="toast-body">
+        ✅ Pesanan berhasil diproses! Silakan lanjutkan di WhatsApp.
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+
+  <!-- Toast Error -->
+  <div id="errorToast" class="toast align-items-center text-bg-danger border-0" role="alert">
+    <div class="d-flex">
+      <div class="toast-body">
+        ❌ Harap isi semua data dengan benar!
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Tombol Pesan → isi produk otomatis ke input modal
+  document.querySelectorAll(".pesanBtn").forEach(btn => {
+    btn.addEventListener("click", function() {
+      document.getElementById("produkInput").value = this.dataset.produk;
+      let modal = new bootstrap.Modal(document.getElementById("pesanModal"));
+      modal.show();
+    });
+  });
+
+  // Handle submit form
+  document.getElementById("formPesan").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let nama = document.getElementById("nama").value.trim();
+    let nomor = document.getElementById("wa").value.trim();
+    let alamat = document.getElementById("alamat").value.trim();
+    let produk = document.getElementById("produkInput").value.trim(); // ✅ sudah fix
+    let jumlah = document.getElementById("jumlah").value.trim();
+
+    // Validasi input
+    if (!nama || !nomor || !alamat || !produk || !jumlah) {
+      showToast("errorToast");
+      return;
+    }
+
+    // Validasi nomor WA
+    if (!/^62\d{8,15}$/.test(nomor)) {
+      document.querySelector("#errorToast .toast-body").textContent = "❌ Nomor WhatsApp harus diawali 62 dan hanya angka!";
+      showToast("errorToast");
+      return;
+    }
+
+    let noWaToko = "6285718238006"; // Ganti nomor WA kamu
+    let pesan = `Halo, saya mau pesan:\nNama: ${nama}\nNo. WA: ${nomor}\nAlamat: ${alamat}\nProduk: ${produk}\nJumlah: ${jumlah}`;
+    let url = `https://wa.me/${noWaToko}?text=${encodeURIComponent(pesan)}`;
+    window.open(url, "_blank");
+
+    // Reset form
+    document.getElementById("formPesan").reset();
+
+    // Tutup modal
+    let modalEl = document.getElementById('pesanModal');
+    let modal = bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+
+    // Tampilkan toast sukses
+    showToast("successToast");
+  });
+
+  // Fungsi menampilkan toast
+  function showToast(id) {
+    let toastEl = document.getElementById(id);
+    let toast = new bootstrap.Toast(toastEl);
+    toast.show();
+  }
+</script>
+
+<!-- Fitur -->
+<section class="features" id="fitur">
+  <div class="container">
+    <h2 class="text-center mb-4">Keunggulan Kami</h2>
+    <p class="text-center mb-5">Mengapa memilih produk SockLocal?</p>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="fs-1 mb-3">🧦</div>
+          <h5>Bahan Berkualitas</h5>
+          <p>Menggunakan bahan katun premium dengan campuran serat khusus untuk kenyamanan maksimal.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="fs-1 mb-3">👟</div>
+          <h5>Desain Ergonomis</h5>
+          <p>Dirancang dengan struktur anatomi kaki untuk memberikan kenyamanan sepanjang hari.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="fs-1 mb-3">🔄</div>
+          <h5>Daya Tahan Tinggi</h5>
+          <p>Teknologi jahitan khusus membuat kaos kaki lebih tahan lama meski sering dicuci.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimoni -->
+<section class="py-5" id="testimoni">
+  <div class="container">
+    <h2 class="text-center mb-4">Testimoni Pelanggan</h2>
+    <p class="text-center mb-5">Apa kata mereka tentang SockLocal</p>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded shadow-sm">
+          <p><em>"Sejak menggunakan SockLocal, kaki saya tidak mudah lelah lagi meski seharian bekerja. Bahannya sangat nyaman!"</em></p>
+          <p class="fw-bold">- Budi Santoso</p>
+          <div class="text-warning">★★★★★</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded shadow-sm">
+          <p><em>"Desainnya fashionable tapi tetap nyaman. Cocok untuk dipakai kuliah maupun hangout."</em></p>
+          <p class="fw-bold">- Ani Fitriani</p>
+          <div class="text-warning">★★★★☆</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded shadow-sm">
+          <p><em>"Sebagai runner, saya puas dengan kaos kaki sport SockLocal. Tidak mudah geser dan menyerap keringat dengan baik."</em></p>
+          <p class="fw-bold">- Rizki Pratama</p>
+          <div class="text-warning">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" id="kontak">
+  <div class="container">
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <h5>Tentang Kami</h5>
+        <p>SockLocal adalah bisnis kaos kaki berkualitas yang berkomitmen memberikan produk terbaik untuk kenyamanan kaki Anda.</p>
+      </div>
+      <div class="col-md-4">
+        <h5>Link Cepat</h5>
+        <ul class="list-unstyled">
+          <li><a href="#home">Beranda</a></li>
+          <li><a href="#produk">Produk</a></li>
+          <li><a href="#testimoni">Testimoni</a></li>
+          <li><a href="profil.html">Profil</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h5>Hubungi Kami</h5>
+        <p>📞 +62 857-2709-1172</p>
+        <p>✉️ info@stepsock.com</p>
+        <p>🏠 Jl. Kaos Kaki No. 123, Jakarta</p>
+      </div>
+    </div>
+    <div class="text-center border-top pt-3">
+      <p class="mb-0">© 2025 SockLocal. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer> 
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
